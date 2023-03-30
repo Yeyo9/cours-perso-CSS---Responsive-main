@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
+
+/* 
+
+*{
+  le sélecteur * représente tous les éléments du site
+}
+    
+    */
+
+
+body {
+    background: url(./img/grey-wallpaper-preview.jpg) center/cover;
+    /* vh (viewport height) = 100% de la taille de l'écran */
+    min-height: 100vh;
+}
+
+h1 {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-align: center;
+        /* Les tailles de polices doivent être en REM (sauf si on veut le mettre en vw) */
+        font-size: 8vw; /* vw (viewport-width) = c'est l'idéal pour mettre en responsive la taille de l'écriture sans passer par les médias query */
+        text-shadow: 3px -1px 5px #00000082;
+        color: rgb(140, 85, 108);
+        font-family: 'Oswald', sans-serif;
+}
+
+
+main {
+    min-height: 500px; /* la hauteur doit faire minimum 500px */
+    /* Sur les width, privilegiez les % */
+    width: 90%;
+    background: rgba(213, 27, 27, 0.373);
+    /* Centrer une boite */
+    margin: 0 auto;
+    border: 2px solid blue;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 0 9px 6px black;
+    padding: 15px;
+}
+
+h2 {
+
+    margin: 0;
+}
+/* Flexbox */
+/* Sert à répartir équitablement des éléments sur la page */
+ .flexbox,
+ .grid,
+ .absolute {
+
+    border: 2px solid skyblue;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    min-height: 150px;
+}
+
+.flexbox ul {
+
+  padding: 0;  
+  display: flex;/* ça aligne les éléments verticalment */
+  justify-content: space-around;/* Peu importe la taille de l'écran, les élements se répartissent convenablement */
+}
+
+
+
+.flexbox li {
+    list-style: none;  /* elève par exemple les points sur les listes */
+    height: 160px; /* hauteur */
+    width: 160px; /* largeur */
+    margin: 10px;
+    background: turquoise;
+/* Centrer un unique élément verticalement et horizontalement */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* GRID = Grille, mieux placer les élément sur la page web */
+.grid-container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+/* le 30% représente l'image et le 70% représente le formulaire */
+}
+
+.grid img {
+    width: 80%;
+    margin: 20px auto;
+    display: block;
+    /* display: block veut dire que tu prend tout l'espace dans la largeur que tu as
+    et tout le reste va à la ligne */
+}
+
+form {
+display: grid;
+grid-template-columns: 1fr 1fr ;/*ça représente 2 colonnes */
+grid-template-rows: 1fr 1fr 1fr;/* ça représente 3 lignes */
+grid-template-areas: /* ça représente un dessin que l'on veut mettre en place sur la page */
+    "i1 i2"
+    "ta ta"
+    "vi bt";
+/* i1 = input 1
+   i2 = input 2
+   ta = textarea
+   vi = vide
+   bt = bouton */
+}
+
+input, textarea {
+    margin: 5px;
+    border: 1px solid darkblue;
+    padding: 10px;
+    font-size: 1.1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-radius: 5px;
+}
+
+
+
+textarea {
+    grid-area: ta;
+/* le "grid-area: ta" représente le textarea du html */
+    height: 40px;
+    resize: none;/* ça rend impossible de modifier la taille du formulaire */
+}
+
+
+#btn-submit {
+    grid-area: bt;
+    /* le "grid-area: bt" représente le id "btn-submit" du html */
+    cursor: pointer;
+    background: cyan;
+    transition: 0.2s;
+    
+}
+
+#btn-submit:hover {
+/* hover c'est au survol, quand on passe la souris sur l'élément */
+    background: darkblue;
+    color: white;
+}
+
+
+
+
+/* ABSOLUTE */
+/* Sans l'élément en Relative, de base, l'élément en absolute l'est par 
+rapport au Body */
+
+/* Il faut mettre une position relative au parent pour contraidre l'élément
+en absolute (enfant) dans l'élément parent */
+.absolute {
+    position: relative;
+}
+
+
+#circle1 {
+    height: 60px;
+    width: 60px;
+    background: skyblue;
+    position: absolute;
+    border-radius: 150px;
+    top: 0;
+    right: 0;
+}
+
+#circle2 {
+    height: 40px;
+    width: 40px;
+    border-radius: 150px;
+    background: teal;
+    position: absolute;
+    left: 50%;
+    /* transform: translateX, ça permet de translater (déplacer) l'élément, X c'est en horizontal
+     Y c'est en verticale */
+    transform: translateX(-50%);
+    top: 100px;
+
+}
+
+
+/* RESPONSIVE */
+ @media screen and (max-width: 900px)  { /*max-width: 900px = il devient responsive jusqu'à 900 px */
+    .grid-container {
+        display: block; 
+    }
+    .grid-container img {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 610px) {
+    .flexbox ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    form {
+        grid-template-columns: 1fr; /* fr = fraction  */
+        grid-template-rows: 1fr;
+        grid-template-areas: 
+            "i1"
+            "i2"
+            "ta"
+            "bt";
+    }
+
+    input,
+    textarea {
+        font-size: 0.8rem;
+    }
+
+
+}
